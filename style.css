@@ -1,0 +1,254 @@
+/* ============================================
+   GLOBAL RESET
+============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ============================================
+   BODY
+============================================ */
+body {
+  background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Soft background glow */
+body::before {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(0, 254, 186, 0.12), transparent 70%);
+  border-radius: 50%;
+  top: -80px;
+  left: -80px;
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ============================================
+   ANIMATIONS
+============================================ */
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(14px); }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ============================================
+   MAIN CARD (MEDIUM SIZE)
+============================================ */
+.card {
+  width: 100%;
+  max-width: 380px;           /* slightly bigger than compact */
+  background: linear-gradient(135deg, #00feba, #5b548a);
+  color: #fff;
+  border-radius: 24px;
+  padding: 24px 20px;         /* slightly more padding */
+  text-align: center;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: slideUp 0.5s ease-out;
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   SEARCH BAR
+============================================ */
+.search {
+  display: flex;
+  gap: 10px;
+}
+
+.search input {
+  flex: 1;
+  height: 44px;               
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  padding: 0 16px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.search button {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search button img {
+  width: 18px;
+}
+
+/* ============================================
+   WEATHER DISPLAY
+============================================ */
+.weather {
+  display: none;
+}
+.weather.show {
+  display: block;
+}
+
+.weather-icon {
+  width: 100px;              
+  margin: 8px auto;
+  animation: bounce 2s infinite;
+}
+
+.weather h1 {
+  font-size: 58px;            
+  font-weight: 700;
+}
+
+.weather h2 {
+  font-size: 28px;            
+  font-weight: 600;
+  margin-top: -4px;
+}
+
+/* ============================================
+   WEATHER DETAILS
+============================================ */
+.details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;         
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 18px;
+  margin-top: 12px;
+}
+
+.col {
+  flex: 1;
+  text-align: center;
+}
+
+.col img {
+  width: 30px;                 
+  margin-bottom: 4px;
+}
+
+.humidity,
+.wind {
+  font-size: 17px;            
+  font-weight: 700;
+}
+
+/* ============================================
+   ERROR MESSAGE
+============================================ */
+.error {
+  display: none;
+  background: rgba(255, 71, 87, 0.95);
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ============================================
+   FORECAST (7 DAYS)
+============================================ */
+.forecast {
+  display: none;
+}
+
+.forecast h3 {
+  font-size: 17px;            
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.forecast-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); 
+  gap: 10px;                      
+  width: 100%;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+}
+
+.forecast-card {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  padding: 7px 5px;
+  text-align: center;
+  transition: 0.25s ease;
+}
+
+.forecast-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.forecast-card .day {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.forecast-card img {
+  width: 26px;
+  margin: 3px 0;
+}
+
+.forecast-temp {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.forecast-weather {
+  font-size: 9px;
+  opacity: 0.85;
+}
+
+/* ============================================
+   MOBILE ADJUSTMENTS
+============================================ */
+@media (max-width: 600px) {
+  .card {
+    max-width: 340px;
+    padding: 20px 16px;
+  }
+
+  .weather h1 {
+    font-size: 50px;
+  }
+
+  .weather h2 {
+    font-size: 24px;
+  }
+
+  .forecast-container {
+    gap: 5px;
+  }
+}
